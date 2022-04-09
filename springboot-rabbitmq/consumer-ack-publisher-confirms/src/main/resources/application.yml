@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: consumer-ack-publisher-confirms
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 10000
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: test
+server:
+  port: 8081
+
