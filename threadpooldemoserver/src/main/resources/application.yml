@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: server
+  profiles:
+    active: dev
+common:
+    executor:
+        corePoolSize: 5
+        maxPoolSize: 10
+        queueCapacity: 100
+        threadNamePrefix: common-
+
+commonRoleId: 15
