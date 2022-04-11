@@ -40,8 +40,8 @@ public class StreamDemo {
 //        demo15();
 //        demo16();
 //        demo17();
-//        demo18();
-        demo19();
+        demo18();
+//        demo19();
     }
 
     /**
