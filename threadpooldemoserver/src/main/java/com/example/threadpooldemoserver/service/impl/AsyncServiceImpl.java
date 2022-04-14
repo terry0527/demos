@@ -19,6 +19,8 @@ public class AsyncServiceImpl implements AsyncService {
         log.info("start executeAsync");
         try{
             Thread.sleep(1000);
+            System.out.println("线程id"+Thread.currentThread().getId());
+            System.out.println("线程名称"+Thread.currentThread().getName());
         }catch(Exception e){
             e.printStackTrace();
         }

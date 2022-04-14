@@ -17,7 +17,11 @@ public class HelloController {
     @Autowired
     private AsyncService asyncService;
 
-    @RequestMapping("/")
+    /**
+     *  一个完整的多线程调用
+     * @return
+     */
+    @RequestMapping("/pool")
     public String submit(){
         log.info("start submit");
 
