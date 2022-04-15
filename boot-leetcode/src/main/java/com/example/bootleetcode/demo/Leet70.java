@@ -1,7 +1,5 @@
 package com.example.bootleetcode.demo;
 
-import lombok.extern.log4j.Log4j;
-
 import java.util.HashMap;
 import java.util.Map;
 
