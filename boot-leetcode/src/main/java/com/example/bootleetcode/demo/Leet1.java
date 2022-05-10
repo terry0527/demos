@@ -1,5 +1,6 @@
 package com.example.bootleetcode.demo;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -18,7 +19,7 @@ public class Leet1 {
     public static void main(String[] args) {
         int[] nums =  {4,6,13,8,7};
         int[] result = fastWithMap(nums,20);
-        System.out.println(result[0]);
+        System.out.println(Arrays.toString(result));
     }
 
     public static int[] fastWithMap(int[] nums,int target){
