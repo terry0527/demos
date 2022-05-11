@@ -1,4 +1,4 @@
-package com.example.bootleetcode.demo;
+package com.example.bootleetcode.demo.easy;
 
 import java.util.Arrays;
 import java.util.HashMap;

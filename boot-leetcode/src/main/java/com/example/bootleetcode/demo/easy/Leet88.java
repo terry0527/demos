@@ -1,4 +1,4 @@
-package com.example.bootleetcode.demo;
+package com.example.bootleetcode.demo.easy;
 
 import java.util.Arrays;
 
@@ -29,8 +29,10 @@ public class Leet88 {
             //num2已经取完，完全取num1的值
             }else if(num2Index<0){
                 break;
+            //num1的元素值大于num2,取num1
             }else if(nums1[num1Index] > nums2[num2Index]){
                 nums1[index]=nums1[num1Index--];
+            //num2的元素值大于num1,取num2
             }else {
                 nums1[index]=nums2[num2Index--];
             }
