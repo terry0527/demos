@@ -1,13 +1,10 @@
-package com.example.utildemo.map;
+package com.example.springboot8.map;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * description  map遍历时间花费
- */
-public class MapTimeDemo {
+public class MapDemo {
 
     public static void main(String[] args) {
         Map<String, Object> map = getMap();
@@ -25,7 +22,6 @@ public class MapTimeDemo {
         }
         return map;
     }
-
     public static void keySet(Map<String,Object> map){
         long startTime = System.currentTimeMillis();
         int count = 0;
@@ -53,7 +49,7 @@ public class MapTimeDemo {
     public static void entrySet(Map<String,Object> map){
         long startTime = System.currentTimeMillis();
         int count = 0;
-        for(Map.Entry<String,Object> entry: map.entrySet()){
+        for(Map.Entry<String,Object> entry:map.entrySet()){
             count++;
             String key = entry.getKey();
             String value = entry.getValue().toString();
@@ -85,5 +81,4 @@ public class MapTimeDemo {
         long endTime = System.currentTimeMillis();
         System.out.println("java8内置方法运行时间" + (endTime - startTime));
     }
-
 }

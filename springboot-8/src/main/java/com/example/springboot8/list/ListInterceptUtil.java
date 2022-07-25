@@ -1,4 +1,4 @@
-package com.example.utildemo.list2;
+package com.example.springboot8.list;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.List;
  * description 按指定大小，分隔集合，将集合按规定个数分为n个部分
  * history:
  */
-public class ListGroupUtil {
+public class ListInterceptUtil {
 
     public static List<List<String>> splitList(List<String> list, int len) {
         if (list == null || list.size() == 0 || len < 1) {
@@ -34,17 +34,16 @@ public class ListGroupUtil {
         list.add("4");
         list.add("5");
         list.add("6");
-        List<List<String>> li=splitList(list,3);
+        List<List<String>> li = splitList(list, 3);
         System.out.println("***"+li);
-        for(List obj:li){
+        for (List obj : li) {
             String value = "";
-            for(Object ao:obj){
-                value=value+ao.toString()+",";
+            for (Object ao : obj) {
+                value = value + ao.toString() + ",";
             }
-            String real=value.substring(0,value.length()-1);
-            System.out.println("value***"+real);
+            String real = value.substring(0, value.length() - 1);
+            System.out.println("value***" + real);
             System.out.println("+++++");
         }
-
     }
 }

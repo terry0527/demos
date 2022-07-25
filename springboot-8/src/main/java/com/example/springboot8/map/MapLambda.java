@@ -1,14 +1,13 @@
-package com.example.utildemo.map;
+package com.example.springboot8.map;
 
-import com.example.utildemo.entity.Person;
-import com.example.utildemo.entity.User;
+import com.example.springboot8.entity.User;
+import com.example.springboot8.utils.SecretUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class StreamMap {
+public class MapLambda {
 
     // Collectors.toMap()，一般用于将一个List转换为Map。常见用法：
 
@@ -20,9 +19,13 @@ public class StreamMap {
         return userList;
     }
 
+    public static void main(String[] args) {
+        demo5();
+    }
+
     //两个参数的用法
     public static void demo1(){
-       List<User> userList = getList();
+        List<User> userList = getList();
         //将userList转化为key为id，value为User对象的map
         Map<Long, User> map = userList.stream().collect(Collectors.toMap(User::getId, p -> p));
 
@@ -73,24 +76,20 @@ public class StreamMap {
          */
     }
 
-    //三个参数的用法
     public static void demo3(){
-        /**
-         * 还是沿用上面那个例子，如果这个时候你想获取key是age，value是name的map呢？如果你还是沿用上面的方法，就会出问题了，
-         * 因为有两个age是 18 的数据，也就是存在重复的key，会直接报错，想不报错的话，就可以利用第三个参数了。
-         */
         List<User> userList = getList();
-
-        Map<Integer, String> map = userList.stream().collect(Collectors.toMap(User::getAge, User::getName, (a, b) -> b));
-
+        Map<Long, User> map = userList.stream().collect(Collectors.toMap(User::getId, Function.identity(), (a,b) -> a));
+        map.forEach((k,v)-> System.out.println("key="+k+" value="+v));
         /**
-         * (a, b) -> b的意思就是，如果存在重复的，永远取后面一个
+         * Function.identity() 返回一个输出跟输入一样的Lambda表达式对象，等价于形式 t -> t
          *
-         * 这时，map里的值就是：
+         * User::getId ===》 User对象的getId方法
          *
+         * 而这时map里的（模拟）值是：
          * {
-         * 	18: "王五"
-         * 	19: "李四"
+         * key=1 value=User(id=1, name=张三, age=18)
+         * key=2 value=User(id=2, name=李四, age=19)
+         * key=3 value=User(id=3, name=王五, age=18)
          * }
          *
          */
@@ -118,4 +117,35 @@ public class StreamMap {
          */
     }
 
+    public static void demo5(){
+        /**
+         *
+         */
+        Map<String,String> testMap = new HashMap<>();
+        testMap.put("a","a1");
+        testMap.put("b","b1");
+
+        String res = testMap.entrySet().stream()
+                .sorted(Comparator.comparing(Map.Entry::getKey))
+                .map(Objects::toString)
+                .reduce((s1,s2) -> s1+"&"+s2)
+                .map(s ->s+"sign")
+                .map(SecretUtils::encrypt)
+                .map(String::toUpperCase)
+                .get();
+        System.out.println("++++:"+res);
+
+
+        /**
+         * 可以看到，这次的返回值变成了 Map<Integer, List> 了，也就是说，变成了key是age，value是User对象的集合了。
+         * 这时，map里的值就变成了：
+         *
+         * {
+         * 	18: [User(1, "张三", 18), User(3, "王五", 18)]
+         * 	19: [User(2, "李四", 19)]
+         * }
+         *
+         *
+         */
+    }
 }
