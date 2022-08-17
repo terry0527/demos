@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * RabbitMQ通用的消息发送服务
  *
@@ -35,8 +37,8 @@ public class RabbitSenderService {
     @Autowired
     private Environment env;
 
-    @Autowired
-    private ItemKillSuccessMapper itemKillSuccessMapper;
+    @Resource
+    ItemKillSuccessMapper itemKillSuccessMapper;
 
 
     /**

@@ -54,10 +54,6 @@
   </update>
 
 
-
-
-
-
   <!--获取秒杀详情V2-->
   <select id="selectByIdV2" resultType="com.example.model.entity.ItemKill">
     SELECT
@@ -70,15 +66,6 @@
     FROM item_kill AS a LEFT JOIN item AS b ON b.id = a.item_id
     WHERE a.is_active = 1 AND a.id =#{id} AND a.total>0
   </select>
-
-
-
-
-
-
-
-
-
 
   <!--抢购商品，剩余数量减一-->
   <update id="updateKillItemV2">

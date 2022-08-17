@@ -25,6 +25,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -251,7 +252,7 @@ public class KillService implements IKillService {
     }
 
 
-    @Autowired
+    @Resource
     private CuratorFramework curatorFramework;
 
     private static final String pathPrefix="/kill/zkLock/";
