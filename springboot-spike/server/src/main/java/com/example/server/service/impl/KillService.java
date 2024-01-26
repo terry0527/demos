@@ -173,6 +173,7 @@ public class KillService implements IKillService {
 
             //TODO:借助Redis的原子操作实现分布式锁-对共享操作-资源进行控制
             ValueOperations valueOperations=stringRedisTemplate.opsForValue();
+            //加了userId作为锁，这是为了做幂等
             final String key=new StringBuffer().append(killId).append(userId).append("-RedisLock").toString();
             final String value=RandomUtil.generateOrderCode();
             Boolean cacheRes=valueOperations.setIfAbsent(key,value); //lua脚本提供“分布式锁服务”，就可以写在一起

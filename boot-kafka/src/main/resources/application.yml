@@ -1,0 +1,79 @@
+# 配置端口
+server:
+  port: 8080
+
+spring:
+  #kafka配置
+  kafka:
+    #这里改为你的kafka服务器ip和端口号
+    bootstrap-servers: 10.10.19.19:9092
+    #=============== producer  =======================
+    producer:
+      #如果该值大于零时，表示启用重试失败的发送次数
+      retries: 0
+      #每当多个记录被发送到同一分区时，生产者将尝试将记录一起批量处理为更少的请求，默认值为16384(单位字节)
+      batch-size: 16384
+      #生产者可用于缓冲等待发送到服务器的记录的内存总字节数，默认值为3355443
+      buffer-memory: 33554432
+      #key的Serializer类，实现类实现了接口org.apache.kafka.common.serialization.Serializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      #value的Serializer类，实现类实现了接口org.apache.kafka.common.serialization.Serializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    #=============== consumer  =======================
+    consumer:
+      #用于标识此使用者所属的使用者组的唯一字符串
+      group-id: test-consumer-group
+      #当Kafka中没有初始偏移量或者服务器上不再存在当前偏移量时该怎么办，默认值为latest，表示自动将偏移重置为最新的偏移量
+      #可选的值为latest, earliest, none
+      auto-offset-reset: earlie  st
+      #消费者的偏移量将在后台定期提交，默认值为true
+      enable-auto-commit: true
+      #如果'enable-auto-commit'为true，则消费者偏移自动提交给Kafka的频率（以毫秒为单位），默认值为5000。
+      auto-commit-interval: 100
+      #密钥的反序列化器类，实现类实现了接口org.apache.kafka.common.serialization.Deserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      #值的反序列化器类，实现类实现了接口org.apache.kafka.common.serialization.Deserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+#----------------mybatis plus配置-----------------------
+mybatis-plus:
+  # xml扫描，多个目录用逗号或者分号分隔(告诉 Mapper 所对应的 XML 文件位置)
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+    map-underscore-to-camel-case: true
+    # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
+    call-setters-on-nulls: true
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  # 实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.demo.kafka.model
+  global-config:
+    db-config:
+      #主键类型 AUTO:"数据库ID自增" INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: auto
+      #字段策略 IGNORED:"忽略判断"  NOT_NULL:"非 NULL 判断")  NOT_EMPTY:"非空判断"
+      field-strategy: NOT_EMPTY
+      #数据库类型
+      db-type: MYSQL
+      # 逻辑删除配置
+      # 删除前
+      logic-not-delete-value: 1
+      # 删除后
+      logic-delete-value: 0
+      # 数据库表名的前缀
+      table-prefix: t_
+
+
+#----------------swagger配置-----------------------
+swagger:
+  #生产环境改为false
+  enable: true
+#解决Swagger2 异常 NumberFormatException:For input string:""
+logging:
+  level:
+    io:
+      swagger:
+        models:
+          parameters:
+            AbstractSerializableParameter: ERROR
